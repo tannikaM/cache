@@ -2,7 +2,8 @@ package Cache;
 
 import Cache.evictionPolicy.EvictionPolicy;
 import Cache.storage.Storage;
-import Exception.StorageFullException;
+import Exception.*;
+
 
 public class Cache<Key, Value> {
     private final EvictionPolicy<Key> policy;
@@ -15,9 +16,16 @@ public class Cache<Key, Value> {
     }
 
     public Value get(Key key){
-        this.policy.AccessedKey(key);
-        Value value = this.storage.get(key);
-        return value;
+        try{
+            this.policy.AccessedKey(key);
+            Value value = this.storage.get(key);
+            return value;
+        }catch (Exception ex){
+            System.out.println("Value can not be found");
+        }
+
+        return null;
+
     }
 
     public void put(Key key, Value value) throws Exception{

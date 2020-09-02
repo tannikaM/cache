@@ -3,6 +3,6 @@ package Cache.evictionPolicy;
 public interface EvictionPolicy<Key> {
 
     public void AccessedKey(Key key);
-    public Key removeKey();
+    public Key keyToBeRemoved();
 
 }

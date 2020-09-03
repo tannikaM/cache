@@ -35,7 +35,12 @@ public class HashMapStorage<Key, Value> implements Storage<Key, Value>{
         return this.storage.size() == this.capacity;
     }
 
-    public void removeKey(Key key) {
-        this.storage.remove(key);
+    public void removeKey(Key key) throws KeyNotFound {
+        try {
+            this.storage.remove(key);
+        }catch (Exception ex) {
+            throw new KeyNotFound("The key is not present");
+        }
+
     }
 }
